@@ -1,0 +1,27 @@
+{
+  "name": "push-this",
+  "version": "1.0.0",
+  "description": "push-development",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "galdino lee rosas",
+  "license": "ISC",
+  "devDependencies": {
+    "eslint": "^4.7.2",
+    "eslint-config-google": "^0.9.1"
+  },
+  "dependencies": {
+    "async": "^2.5.0",
+    "body-parser": "^1.18.2",
+    "cookie-parser": "^1.4.3",
+    "dotenv": "^4.0.0",
+    "express": "^4.15.5",
+    "express-session": "^1.15.5",
+    "node-json-db": "^0.7.3",
+    "unirest": "^0.5.1",
+    "urlsafe-base64": "^1.0.0",
+    "web-push": "^3.2.3"
+  }
+}
