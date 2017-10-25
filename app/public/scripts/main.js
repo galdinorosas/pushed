@@ -33,7 +33,15 @@ $(document).ready(function() {
   });
 
   $('.push-init').on('click', function(){
-    $.post('trigger-push', {'data':'this is dinos dynamic push message'}).then(function(res){
+
+    function getPushCopy(){
+      var copy = $('.pushCopy').val(),
+      defaultCopy = 'push default message.'
+
+      return copy ? copy : defaultCopy;
+    }
+
+    $.post('trigger-push', {'data':getPushCopy()}).then(function(res){
       console.log('trigger push success', res);
     }, function(err){
       console.log('trigger push err', err);

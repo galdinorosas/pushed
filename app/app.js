@@ -82,6 +82,10 @@ var saveSubToDB = function(sub, res){
   var testEntry = db.getData("/subscriptions[-1]");
 
   if(testEntry === sub){
+
+    var data = db.getData("/");
+    console.log('data', data);
+
     res.status(200);
     res.setHeader('Content-Type', 'application/json');
     return res.send(JSON.stringify({
