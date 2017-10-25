@@ -1,0 +1,43 @@
+# POC-PUSH_NOTIFICATIONS
+---
+### Application Description:             
+
+  - Local hosted push notification UI service.
+  - Subscribe user to push notifications and save their push subscription to backend database.
+  - Send push subscription with dynamic messaging to users within database.
+
+---
+
+### Requirements:
+
+  * HTML
+  * CSS
+  * Javascript
+  * Node.js
+  * Express.js
+
+____
+### Quick Install Instructions
+
+1. Git clone this project onto your computer.
+ 
+2. type into terminal: cd pushed/app
+  
+3. type into terminal: npm install
+    
+
+4. type into terminal : nodemon app.js
+
+    * Run nodemon on your app/app.js file. This will allow the app server to restart on file save.
+
+5. Go to http://localhost:8080/
+
+6. Set notifications to always ask for permission. Google how to for specific browser.
+    
+7. Click enable push notifications button. If successful, you will see the db data (subscriptions) in your terminal.
+   
+8. Enter push message copy and click 'initiate push notification!!' button.
+____
+### CONTACT ME:
+
+  * email: dino.rosas@gmail.com
