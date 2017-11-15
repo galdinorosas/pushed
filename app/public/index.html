@@ -9,7 +9,7 @@
 
   <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
   <link rel="stylesheet" href="styles/index.css">
-  <link rel="manifest" href="/manifest.json" >
+  <link rel="manifest" href="vendor/pushed/manifest.json" >
   
 </head>
 
@@ -23,7 +23,13 @@
     <input type="text" class="pushCopy" placeholder="enter msg here">
     <button class="push-init" type="button">Initiate Push Notification!!</button>
     <p>
-      <button disabled class="js-push-btn mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect">
+      <button class="pushed">
+        Enable Push Messaging
+      </button>
+      <button class="pushed">
+        Enable Push Messaging
+      </button>
+      <button class="pushed">
         Enable Push Messaging
       </button>
     </p>
@@ -32,6 +38,7 @@
 
   <script type="text/javascript" src="vendor/jquery/dist/jquery.js"></script>
   <script src="scripts/main.js"></script>
+  <script type="text/javascript" src="vendor/pushed/pushed.js"></script>
 
   <script src="https://code.getmdl.io/1.2.1/material.min.js"></script>
 </body>

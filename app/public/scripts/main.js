@@ -23,14 +23,14 @@
 
 $(document).ready(function() {
 
-  var applicationServerPublicKey;
+  // var applicationServerPublicKey;
 
-  $.get('/getVapidKey').then(function(res){
-    console.log('vapid key success', res);
-    applicationServerPublicKey = res.key;
-  }, function(err){
-    console.log('vapid key err', err);
-  });
+  // $.get('/getVapidKey').then(function(res){
+  //   console.log('vapid key success', res);
+  //   applicationServerPublicKey = res.key;
+  // }, function(err){
+  //   console.log('vapid key err', err);
+  // });
 
   $('.push-init').on('click', function(){
 
@@ -41,137 +41,137 @@ $(document).ready(function() {
       return copy ? copy : defaultCopy;
     }
 
-    $.post('trigger-push', {'data':getPushCopy()}).then(function(res){
+    $.post('/trigger-push', {'data':getPushCopy()}).then(function(res){
       console.log('trigger push success', res);
     }, function(err){
       console.log('trigger push err', err);
     });
   });
 
-  const pushButton = document.querySelector('.js-push-btn');
+  // const pushButton = document.querySelector('.js-push-btn');
 
-  let isSubscribed = false;
-  let swRegistration = null;
+  // let isSubscribed = false;
+  // let swRegistration = null;
 
-  function urlB64ToUint8Array(base64String) {
-    const padding = '='.repeat((4 - base64String.length % 4) % 4);
-    const base64 = (base64String + padding)
-      .replace(/\-/g, '+')
-      .replace(/_/g, '/');
+  // function urlB64ToUint8Array(base64String) {
+  //   const padding = '='.repeat((4 - base64String.length % 4) % 4);
+  //   const base64 = (base64String + padding)
+  //     .replace(/\-/g, '+')
+  //     .replace(/_/g, '/');
 
-    const rawData = window.atob(base64);
-    const outputArray = new Uint8Array(rawData.length);
+  //   const rawData = window.atob(base64);
+  //   const outputArray = new Uint8Array(rawData.length);
 
-    for (let i = 0; i < rawData.length; ++i) {
-      outputArray[i] = rawData.charCodeAt(i);
-    }
-    return outputArray;
-  }
+  //   for (let i = 0; i < rawData.length; ++i) {
+  //     outputArray[i] = rawData.charCodeAt(i);
+  //   }
+  //   return outputArray;
+  // }
 
-  if ('serviceWorker' in navigator && 'PushManager' in window) {
-    console.log('Service Worker and Push is supported');
+  // if ('serviceWorker' in navigator && 'PushManager' in window) {
+  //   console.log('Service Worker and Push is supported');
 
-    navigator.serviceWorker.register('sw.js')
-    .then(function(swReg) {
-      console.log('Service Worker is registered', swReg);
+  //   navigator.serviceWorker.register('sw.js')
+  //   .then(function(swReg) {
+  //     console.log('Service Worker is registered', swReg);
 
-      swRegistration = swReg;
-        initialiseUI();
-    })
-    .catch(function(error) {
-      console.error('Service Worker Error', error);
-    });
-  } else {
-    console.warn('Push messaging is not supported');
-    pushButton.textContent = 'Push Not Supported';
-  }
+  //     swRegistration = swReg;
+  //       initialiseUI();
+  //   })
+  //   .catch(function(error) {
+  //     console.error('Service Worker Error', error);
+  //   });
+  // } else {
+  //   console.warn('Push messaging is not supported');
+  //   pushButton.textContent = 'Push Not Supported';
+  // }
 
-  function updateBtn() {
-    if (Notification.permission === 'denied') {
-      pushButton.textContent = 'Push Messaging Blocked.';
-      pushButton.disabled = true;
-      return;
-    }
+  // function updateBtn() {
+  //   if (Notification.permission === 'denied') {
+  //     pushButton.textContent = 'Push Messaging Blocked.';
+  //     pushButton.disabled = true;
+  //     return;
+  //   }
 
-    if (isSubscribed) {
-      pushButton.textContent = 'Disable Push Messaging';
-    } else {
-      pushButton.textContent = 'Enable Push Messaging';
-    }
+  //   if (isSubscribed) {
+  //     pushButton.textContent = 'Disable Push Messaging';
+  //   } else {
+  //     pushButton.textContent = 'Enable Push Messaging';
+  //   }
 
-    pushButton.disabled = false;
-  }
+  //   pushButton.disabled = false;
+  // }
 
-  function initialiseUI() {
-    pushButton.addEventListener('click', function() {
-      pushButton.disabled = true;
-      if (isSubscribed) {
-        unsubscribeUser();
-      } else {
-        subscribeUser();
-      }
-    });
+  // function initialiseUI() {
+    // pushButton.addEventListener('click', function() {
+    //   pushButton.disabled = true;
+    //   if (isSubscribed) {
+    //     unsubscribeUser();
+    //   } else {
+    //     subscribeUser();
+    //   }
+    // });
 
-    // Set the initial subscription value
-    swRegistration.pushManager.getSubscription()
-    .then(function(subscription) {
-      isSubscribed = !(subscription === null);
-      console.log('subscription',subscription);
+  //   // Set the initial subscription value
+  //   swRegistration.pushManager.getSubscription()
+  //   .then(function(subscription) {
+  //     isSubscribed = !(subscription === null);
+  //     console.log('subscription',subscription);
 
-      if (isSubscribed) {
-        console.log('User IS subscribed.');
-      } else {
-        console.log('User is NOT subscribed.');
-      }
+  //     if (isSubscribed) {
+  //       console.log('User IS subscribed.');
+  //     } else {
+  //       console.log('User is NOT subscribed.');
+  //     }
 
-      updateBtn();
-    });
-  }
+  //     updateBtn();
+  //   });
+  // }
 
-  function subscribeUser() {
-    const applicationServerKey = urlB64ToUint8Array(applicationServerPublicKey);
-    console.log('applicationServerKey', applicationServerKey);
-    swRegistration.pushManager.subscribe({
-      userVisibleOnly: true,
-      applicationServerKey: applicationServerKey
-    })
-    .then(function(subscription) {
-      console.log('User is subscribed.');
+  // function subscribeUser() {
+  //   const applicationServerKey = urlB64ToUint8Array(applicationServerPublicKey);
+  //   console.log('applicationServerKey', applicationServerKey);
+  //   swRegistration.pushManager.subscribe({
+  //     userVisibleOnly: true,
+  //     applicationServerKey: applicationServerKey
+  //   })
+  //   .then(function(subscription) {
+  //     console.log('User is subscribed.');
 
-      var sub = JSON.parse(JSON.stringify(subscription));
+  //     var sub = JSON.parse(JSON.stringify(subscription));
       
-      $.post('/send-subscription', sub).then(function(res){
-        console.log('sub post success', res);
-      }, function(err){
-        console.log('sub post err', err);
-      });
+  //     $.post('/send-subscription', sub).then(function(res){
+  //       console.log('sub post success', res);
+  //     }, function(err){
+  //       console.log('sub post err', err);
+  //     });
 
-      isSubscribed = true;
+  //     isSubscribed = true;
 
-      updateBtn();
-    })
-    .catch(function(err) {
-      console.log('Failed to subscribe the user: ', err);
-      updateBtn();
-    });
-  }
+  //     updateBtn();
+  //   })
+  //   .catch(function(err) {
+  //     console.log('Failed to subscribe the user: ', err);
+  //     updateBtn();
+  //   });
+  // }
 
-  function unsubscribeUser() {
-    swRegistration.pushManager.getSubscription()
-    .then(function(subscription) {
-      if (subscription) {
-        return subscription.unsubscribe();
-      }
-    })
-    .catch(function(error) {
-      console.log('Error unsubscribing', error);
-    }).then(function() {
+  // function unsubscribeUser() {
+  //   swRegistration.pushManager.getSubscription()
+  //   .then(function(subscription) {
+  //     if (subscription) {
+  //       return subscription.unsubscribe();
+  //     }
+  //   })
+  //   .catch(function(error) {
+  //     console.log('Error unsubscribing', error);
+  //   }).then(function() {
 
-      console.log('User is unsubscribed.');
-      isSubscribed = false;
+  //     console.log('User is unsubscribed.');
+  //     isSubscribed = false;
 
-      updateBtn();
-    });
-  }
+  //     updateBtn();
+  //   });
+  // }
 });
 
